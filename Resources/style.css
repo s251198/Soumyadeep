@@ -117,3 +117,8 @@ button {
     background-color: #04AA6D;
     color: #fff;
 }
+
+.start {
+    width: 20%;
+    height: auto;
+}
