@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interest Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .item {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+        .item:last-child {
+            border-bottom: none;
+        }
+        .item h2 {
+            margin: 0;
+            font-size: 20px;
+            color: #007BFF;
+        }
+        .item p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Interest Data</h1>
+    <div id="data-container"></div>
+</div>
+
+<script>
+    async function fetchData() {
+        try {
+            const response = await fetch('data.json');
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            const data = await response.json();
+            displayData(data);
+        } catch (error) {
+            console.error('There has been a problem with your fetch operation:', error);
+        }
+    }
+
+    function displayData(data) {
+        const container = document.getElementById('data-container');
+        container.innerHTML = '';
+        data.forEach(item => {
+            const div = document.createElement('div');
+            div.classList.add('item');
+            div.innerHTML = `
+                    <h2>${item.name}</h2>
+                    <p><strong>Interest:</strong> ${item.interest}</p>
+                    <p><strong>Location:</strong> ${item.location}</p>
+                `;
+            container.appendChild(div);
+        });
+    }
+
+    fetchData();
+</script>
+</body>
+</html>
